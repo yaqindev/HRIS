@@ -59,7 +59,7 @@ $this->load->view('header.php');
 									<div class="form-group row">
 										<label class="col-md-offset-1 col-md-2">Date of Birth</label>
 										<div class="col-md-4">
-											<input type="date" class="form-control" name="dob" value="<?php echo $employee->BIRTHDATE ?> " required>
+											<input type="date" class="form-control" name="dob" value="<?php echo date("Y-m-d",strtotime($employee->BIRTHDATE));?>" required>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -81,7 +81,15 @@ $this->load->view('header.php');
 									<div class="form-group row">
 										<label class="col-md-offset-1 col-md-2">Religion</label>
 										<div class="col-md-4">
-											<input type="text" class="form-control" name="religion" placeholder="Religion" value="<?php echo $employee->RELIGION ?> " required>
+											<!-- <input type="text" class="form-control" name="religion" placeholder="Religion" value="<?php echo $employee->RELIGION ?> " required> -->
+											<select name="religion" id="religion" class="form-control" required>
+												<option value="">-- Pilih Religion --</option>
+												<option value="islam" <?php if ($employee->RELIGION =='islam'){echo "selected";} ?>>islam</option>
+												<option value="kristen" <?php if ($employee->RELIGION =='kristen'){echo "selected";} ?>>kristen</option>
+												<option value="katolik" <?php if ($employee->RELIGION =='katolik'){echo "selected";} ?>>katolik</option>
+												<option value="hindu" <?php if ($employee->RELIGION =='hindu'){echo "selected";} ?>>hindu</option>
+												<option value="budha" <?php if ($employee->RELIGION =='budha'){echo "selected";} ?>>budha</option>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -95,7 +103,7 @@ $this->load->view('header.php');
 									<div class="form-group row">
 										<label class="col-md-offset-1 col-md-2">Join Date</label>
 										<div class="col-md-4">
-											<input type="date" class="form-control" name="join" value="<?php echo $employee->JOINT_DATE ?> " required>
+											<input type="date" class="form-control" name="join" value="<?php echo date("Y-m-d",strtotime($employee->JOINT_DATE));?>" required>
 										</div>
 									</div>
 									<div class="form-group row">

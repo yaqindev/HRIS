@@ -56,16 +56,18 @@ jq(document).ready(function() {
 				<div class="row mt">
 					<div class="col-lg-12">
 						<div class="form-panel">
-							<form method="post" action="<?php echo base_url()."crud/add_employee";?>">
+							<form method="post" action="#";?>">
 								<h1 class="mb" align="center">Employee List</h1>
 								<div class="row">
-									<div class="col-md-1">
-										<a href='<?php echo base_url()."master/employee_act/tambah";?>' class="btn btn-success btn-xs"> Add Emlpoyee</a>
+									<div class="col-md-1" style="margin-right:10px;">
+										<a href='<?php echo base_url()."master/employee_act/tambah";?>' class="btn btn-success btn-xs"> Add Employee</a>
 									</div>
-									<div class="col-md-4">
-										<form id="myForm">
-										<button type="button" onclick="return confirm('Anda yakin menghapus data ini (menonaktifkan) ?');" id="del" class="btn btn-danger btn-xs">Delete</button>
-										</form>
+									<div class="col-md-2">
+										<?php 
+										// <form id="myForm">
+										// 	<button type="button" onclick="return confirm('Anda yakin menghapus data ini (menonaktifkan) ?');" id="del" class="btn btn-danger btn-xs">Delete</button>
+										// </form>
+										?>
 									</div>
 								</div>
 								<br>
@@ -73,7 +75,6 @@ jq(document).ready(function() {
 									<thead>
 										<tr  bgcolor="#696969">
 										<?php
-										echo "<td style='color:white'><b><center></td>";
 										echo "<td style='color:white'><b><center>NIK</td>";
 										echo "<td style='color:white'><b><center>Name</td>";
 										echo "<td style='color:white'><b><center>Department</td>";
@@ -81,6 +82,8 @@ jq(document).ready(function() {
 										echo "<td style='color:white'><b><center>Employment Status</td>";
 										echo "<td style='color:white'><b><center>Active Status</td>";
 										echo "<td style='color:white'><b><center>Location</td>";
+										echo "<td style='color:white'><b><center></td>";
+										echo "</tr>";
 										?>
 										</tr>
 									</thead>
@@ -88,8 +91,7 @@ jq(document).ready(function() {
 									<?php
 									foreach($employee as $d)
 									{
-										echo "<tr>";
-										echo '<td><input type="checkbox" name="checklist[]" value="' .$d->ID_EMPLOYEE. '" > </td>';
+										echo "<tr id='row_".$d->ID_EMPLOYEE."'>";
 										echo "<td>".$d->NIK."</td>";
 										echo "<td><a href='".base_url()."master/employee_act/edit/".$d->ID_DETAIL."'>".$d->NAME."</a></td>";
 										echo "<td>".$d->DEPARTMENT_NAME."</td>";
@@ -120,6 +122,9 @@ jq(document).ready(function() {
 											echo "<td><center>Lainnya</td>";
 												break;
 										}
+										echo "<td>
+											<button type='button' class='btn btn-xs btn-danger' onclick='hapus(".$d->ID_EMPLOYEE.")'><i class='fa fa-times'></i> Delete</button>
+										</td>";
 										
 										echo "</tr>";				
 										
@@ -135,6 +140,32 @@ jq(document).ready(function() {
 			</section><!-- end.wrapper -->
 		</section>
 	</section>
+
+	<script>
+		function hapus(id)
+		{
+			var cek = confirm("apakah anda yakin ingin Non Active kan data ini ?");
+			if (cek)
+			{
+				$.ajax({
+					url 	: '<?php echo base_url() ?>master/employee_act/hapus',
+					type 	: 'post',
+					data 	: {'id':id},
+					success : function(r)
+					{
+						location.reload();
+					},
+					error 	: function(r)
+					{
+						alert("Maaf data tidak dapat di hapus, cek transaksi yang terhubung dengan data ini !.");
+					}
+				});
+			}
+			else{
+				location.reload();
+			}
+		}
+	</script>
 	</body>
 <?php
 $this->load->view("footer.php");

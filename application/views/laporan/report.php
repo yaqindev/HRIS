@@ -86,51 +86,13 @@ $this->load->view('header.php');
 								</form>
 							</div><!-- end.col-md-offset-1 -->
 						</div><!-- end.row -->
-							<br>
-					<div id="box_report">
-						<div>							
-							<!-- <h4><center>--- Performance Department ---</center></h4>
-							<hr>							
-								<div class="row">
-									<div class="col-md-12">
-										<table class="table table-bordered">
-											<thead bgcolor="#696969">
-												<tr>
-													<th style ="color :white; text-align:center;" width="5%">No.</th>
-													<th style ="color :white; text-align:center;" width="60%">Department</th>
-													<th style ="color :white; text-align:center;" width="15%">Nilai</th>
-												</tr>
-											</thead>
-											<tbody>
-											<?php 
-												// $no = 1;
-												// foreach ($dept as $dept) {
-												// echo '
-												// <tr>
-												// 	<td style="text-align:center">'.$no++.'</td>
-												// 	<td>'.$dept->DEPARTMENT_NAME.'</td>
-												// 	<td style="text-align:center">'.round($dept->KPI,2).'</td>
-												// </tr>
-												// ';
-												// }
-											?>
-											</tbody>
-										</table>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="pull-right">
-												<p><a href="'.base_url().'laporan/print_PA/'.2.'"><i class="glyphicon glyphicon-save"></i> Cetak PDF</a></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							<hr> -->
+						<br>
+						<div id="box_report">
+							<div>							
+
+							</div>
+							<!-- end #box_report -->
 						</div>
-						<!-- end #box_report -->
-
-					</div>
-
 					</div>	
 				</div><!-- end.col-lg-12 -->
 			</div><!-- end.row mt -->
@@ -175,14 +137,12 @@ $this->load->view('header.php');
 			var kriteria 	= $("#kriteria").val();
 			if (periode && tahun && kriteria)
 			{
-				alert("ok jalan");
 				$.ajax({
 					url 	:'<?php echo base_url() ?>laporan/print_DEPT',
 					type 	:'post',
 					data 	:{'periode':periode, 'tahun':tahun, 'kriteria':kriteria},
 					success : function(r)
 					{
-						// $("#box_report").html(r);
 						alert("Data berhasil di cetak.");
 					},
 					error 	: function(r)

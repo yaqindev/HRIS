@@ -53,6 +53,11 @@ class M_Kpi extends CI_Model {
 		return $this->db->update($tabelName,$data,$where);
 		
 	}
+
+	function remove($id)
+	{
+		return $this->db->delete('kpi',array('ID_KPI'=>$id));
+	}
 	
 
 }

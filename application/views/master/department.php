@@ -56,15 +56,15 @@ jq(document).ready(function() {
 							
 						</form>
 							<div class="row">
-							<div class="col-md-2">
-							<form action="<?php echo base_url()."master/department_act/tambah";?>">
-							<button type="submit" class="btn btn-success btn-xs">Add Department</button>
-							</form>
+							<div class="col-md-1" style="margin-right:20px;">
+								<form action="<?php echo base_url()."master/department_act/tambah";?>">
+									<button type="submit" class="btn btn-success btn-xs">Add Department</button>
+								</form>
 							</div>
 							<div class="col-md-1">
-							<form id="myForm">
-							<button type="submit"   onclick="return confirm('Anda yakin menghapus data ini?');" id="del" class="btn btn-danger btn-xs">Delete</button>
-							</form>
+								<form id="myForm">
+									<button type="submit"   onclick="return confirm('Anda yakin menghapus data ini?');" id="del" class="btn btn-danger btn-xs">Delete</button>
+								</form>
 							</div>
 							</div>
 							<table  id="example" class="display" cellspacing="0" width="100%">

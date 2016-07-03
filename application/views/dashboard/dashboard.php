@@ -21,6 +21,7 @@ $this->load->view('header.php');
 	        chart: {
 	            type: 'column'
 	        },
+	        credits: false,
 	        title: {
 	            text: 'Performance Department <?php echo $department; ?>'
 	        },

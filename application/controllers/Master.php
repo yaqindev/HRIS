@@ -10,7 +10,7 @@ class Master extends CI_Controller {
 
 	public function employee()
 	{
-		$data['employee']	= $this->tbl_employee->join_all();
+		$data['employee']	= $this->tbl_employee->join_all_kar();
 
 		$this->load->view('master/employee',$data);
 	}
@@ -153,6 +153,10 @@ class Master extends CI_Controller {
 					}
 				} 
 				break;
+			case 'hapus':
+				$id_employee = $this->input->post('id');
+				$this->tbl_employee->Update(array('employee.ACTIVE_STATUS'=>'2'),array('employee.ID_EMPLOYEE'=>$id_employee));
+				break;
 			default:
 				redirect('master/employee');
 				break;
@@ -227,20 +231,20 @@ class Master extends CI_Controller {
 					redirect('master/user');
 				}
 				break;
-			case 'upstat_user':
-				$aDoor = $_POST['checklist'];
-				// echo "<pre>";
-				// print_r($aDoor);
-				// echo "</pre>";
-				if(!empty($aDoor)) {
-					$N = count($aDoor);
+			// case 'upstat_user':
+			// 	$aDoor = $_POST['checklist'];
+			// 	// echo "<pre>";
+			// 	// print_r($aDoor);
+			// 	// echo "</pre>";
+			// 	if(!empty($aDoor)) {
+			// 		$N = count($aDoor);
 
-					for($i=0; $i < $N; $i++){
-						$where = array('ID_USER'=>$aDoor[$i]);
-						$this->user->remove($where);
-					}
-				} 
-				break;
+			// 		for($i=0; $i < $N; $i++){
+			// 			$where = array('ID_USER'=>$aDoor[$i]);
+			// 			$this->user->remove($where);
+			// 		}
+			// 	} 
+			// 	break;
 			case 'set_employee':
 				$job = $this->input->post('job');
 				$emp = $this->tbl_employee->join_full(array('employee.ID_JOBTITLE'=>$job));
@@ -253,6 +257,10 @@ class Master extends CI_Controller {
 					echo '
 				</select>
 				';
+				break;
+			case 'hapus':
+				$id_user = $this->input->post('id');
+				$this->user->remove(array('ID_USER'=>$id_user));
 				break;
 			default:
 				redirect('master/user');

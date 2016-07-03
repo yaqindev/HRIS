@@ -79,7 +79,14 @@ $this->load->view('header.php');
 									<div class="form-group row">
 										<label class="col-md-offset-1 col-md-2">Religion</label>
 										<div class="col-md-4">
-											<input type="text" class="form-control" name="religion" placeholder="Religion" required>
+											<select name="religion" id="religion" class="form-control" required>
+												<option value="">-- Pilih Religion --</option>
+												<option value="Islam">Islam</option>
+												<option value="Kristen">Kristen</option>
+												<option value="Katolik">Katolik</option>
+												<option value="Hindu">Hindu</option>
+												<option value="Budha">Budha</option>
+											</select>
 										</div>
 									</div>
 								</div>

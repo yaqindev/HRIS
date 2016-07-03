@@ -28,12 +28,13 @@ class Appraisal extends CI_Controller
 							<tr  bgcolor="#696969">
 								<td style ="color :white" width="10">No.</td>
 								<td style ="color :white" width="10">Department</td>
-								<td style ="color :white" width="40">Strategic Objective</td>
+								<td style ="color :white" width="30">Strategic Objective</td>
 								<td style ="color :white" width="30">KPI</td>
 								<td style ="color :white" width="10">UOM</td>
 								<td style ="color :white" width="10">Target</td>
 								<td style ="color :white" width="10">Weight</td>
 								<td style ="color :white" width="10">Type</td>
+								<td style ="color :white" width="10"></td>
 							</tr>
 						</thead>
 				
@@ -42,7 +43,7 @@ class Appraisal extends CI_Controller
 							foreach($data as $kpi)
 							{
 							
-								echo"<tr>";
+								echo"<tr id='row_".$kpi->ID_KPI."'>";
 								echo "<td style='text-align:center'>".$no++."</td>";
 								echo "<td>".ucfirst(strtolower($kpi->DEPARTMENT_NAME))."</td>";
 								echo "<td><a href='".base_url()."appraisal/kpi_act/edit/".$kpi->ID_KPI."'>".ucfirst(strtolower($kpi->TARGET_DESCRIPTION))."</a></td>";
@@ -51,6 +52,9 @@ class Appraisal extends CI_Controller
 								echo "<td style='text-align:center'>".$kpi->TARGET."</td>";
 								echo "<td style='text-align:center'>".$kpi->WEIGHT."</td>";
 								echo "<td style='text-align:center'>".$kpi->TYPE."</td>";
+								echo "<td style='text-align:center'>
+									<button type='button' class='btn btn-xs btn-danger' onclick='hapus(".$kpi->ID_KPI.")'><i class='fa fa-times'></i> Delete</button>
+								</td>";
 								echo"</tr>";
 										
 							}
@@ -72,7 +76,7 @@ class Appraisal extends CI_Controller
 				}
 				break;
 			case 'tambah':
-				$data['departments'] = $this->tbl_department->get_all();
+				$data['departments'] = $this->tbl_department->dept_active();
 				$this->load->view('appraisal/kpi_add',$data);
 				break;
 			case 'simpan':
@@ -149,6 +153,10 @@ class Appraisal extends CI_Controller
 					echo "error sistem , please contact administrator";
 				}
 				break;			
+			case 'hapus':
+				$id_kpi = $this->input->post('id');
+				$query = $this->tbl_kpi->remove($id_kpi);
+				break;
 			default:
 				redirect('appraisal/kpi');
 				break;

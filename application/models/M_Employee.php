@@ -19,10 +19,22 @@ class M_Employee extends CI_Model {
 		$this->db->join('employee_personal_detail','employee_personal_detail.ID_EMPLOYEE = employee.ID_EMPLOYEE');
 		if (count($cond) > 0)
 			$this->db->where($cond);
+		$this->db->where('employee.ACTIVE_STATUS','1');
 		return $this->db->get()->result();
 	}
 
 	public function join_all()
+	{
+		$this->db->select('*');
+		$this->db->from('employee');
+		$this->db->join('employee_personal_detail','employee.ID_EMPLOYEE = employee_personal_detail.ID_EMPLOYEE');
+		$this->db->join('departement','departement.ID_DEPARTMENT = employee.ID_DEPARTMENT');
+		$this->db->join('job_title','job_title.ID_JOBTITLE = employee.ID_JOBTITLE');
+		$this->db->where('employee.ACTIVE_STATUS','1');
+		return $this->db->get()->result();
+	}
+
+	public function join_all_kar()
 	{
 		$this->db->select('*');
 		$this->db->from('employee');
@@ -41,6 +53,8 @@ class M_Employee extends CI_Model {
 		$this->db->join('job_title','job_title.ID_JOBTITLE = employee.ID_JOBTITLE');
 		if (count($cond) > 0)
 			$this->db->where($cond);
+		
+		$this->db->where('employee.ACTIVE_STATUS','1');
 		return $this->db->get()->result();
 	}
 

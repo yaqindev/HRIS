@@ -60,11 +60,12 @@ jq(document).ready(function() {
 									<a href="<?php echo base_url() ?>master/user_act/tambah" class="btn btn-success btn-xs">Add User</a>
 								</div>
 								<div class="col-md-1">
-									<form id="myForm">
+									<!--<form id="myForm">
 										<button type="submit"   onclick="return confirm('Anda yakin menghapus data ini?');" id="del" class="btn btn-danger btn-xs">Delete</button>
-									</form>
+									</form> -->
 								</div>
 							</div>
+							<br>
 							<table  id="example" class="display" cellspacing="0" width="100%">
 							
 								<thead>
@@ -75,6 +76,7 @@ jq(document).ready(function() {
 										<td style='color:white'>Username</td>
 										<td style='color:white'>Email</td>
 										<td style='color:white'>Akses</td>
+										<td style='color:white'></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -82,14 +84,16 @@ jq(document).ready(function() {
 								foreach($data as $d)
 								{
 									$akses = $d->HAK_AKSES == '1'?'Administrator':'Manager';
-									echo "<tr>";
+									echo "<tr id='row_".$d->ID_USER."'>";
 									echo "<td><input type='checkbox' name='checklist[]' value='".$d->ID_USER."'></td>";
 									echo "<td><a href='".base_url()."master/user_act/edit/".$d->ID_USER."'>".$d->NIK."</a> </td>";
 									echo "<td>".$d->NAME."</td>";
 									echo "<td>".$d->NAMA_USER."</td>";
 									echo "<td>".$d->EMAIL_USER."</td>";
 									echo "<td>".$akses."</td>";
-									echo "<td></td>";
+									echo "<td>
+										<button type='button' class='btn btn-xs btn-danger' onclick='hapus(".$d->ID_USER.")'><i class='fa fa-times'></i> Delete</button>
+									</td>";
 									echo "</tr>";
 								}?>
 								
@@ -114,6 +118,28 @@ jq(document).ready(function() {
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		function hapus(id)
+		{
+			var cek = confirm("apakah anda yakin ingin menghapus data ini ?");
+			if (cek)
+			{
+				$.ajax({
+					url 	: '<?php echo base_url() ?>master/user_act/hapus',
+					type 	: 'post',
+					data 	: {'id':id},
+					success : function(r)
+					{
+						$("#row_"+id).hide();
+					},
+					error 	: function(r)
+					{
+						alert("Maaf data tidak dapat di hapus, cek transaksi yang terhubung dengan data ini !.");
+					}
+				});
+			}
+		}
+	</script>
 </body>
 <?php
 $this->load->view("footer.php");
