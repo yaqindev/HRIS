@@ -16,35 +16,33 @@ var jq = $.noConflict();
 <!-- DataTables -->
 <script src="<?php echo base_url()."assets/";?>js/jquery.dataTables.js"></script>
 <script>
-jq(document).ready(function() {
-	jq('#example').DataTable();
-	
-} );
+	jq(document).ready(function() {
+		jq('#example').DataTable();
+		
+	} );
 </script>
 <script>
-var oTable;
- 
-jq(document).ready(function() {
-    jq('#myForm').submit( function() {
-        var sData = oTable.$('input').serialize();
-        $.ajax({
-		   type: "POST",
-		   url: "<?php echo base_url()."master/employee_act/upstat_emp";?>",
-		   data: sData,
-		   success:function(data) {
-		   		alert(data);
-				location.reload();
-			},
-			error:function(data){
-				alert(data);
-			}
-			});
-        return false;
-    } );
-     
-    oTable = jq('#example').dataTable();
-} );
-
+	var oTable;
+	jq(document).ready(function() {
+	    jq('#myForm').submit( function() {
+	        var sData = oTable.$('input').serialize();
+	        $.ajax({
+			   type: "POST",
+			   url: "<?php echo base_url()."master/employee_act/upstat_emp";?>",
+			   data: sData,
+			   success:function(data) {
+			   		alert(data);
+					location.reload();
+				},
+				error:function(data){
+					alert(data);
+				}
+				});
+	        return false;
+	    } );
+	     
+	    oTable = jq('#example').dataTable();
+	} );
 </script>
 <body>
 	<section id="container">
@@ -56,7 +54,7 @@ jq(document).ready(function() {
 				<div class="row mt">
 					<div class="col-lg-12">
 						<div class="form-panel">
-							<form method="post" action="#";?>">
+							<form method="post" action="#">
 								<h1 class="mb" align="center">Employee List</h1>
 								<div class="row">
 									<div class="col-md-1" style="margin-right:10px;">
@@ -76,13 +74,13 @@ jq(document).ready(function() {
 										<tr  bgcolor="#696969">
 										<?php
 										echo "<td style='color:white'><b><center>NIK</td>";
-										echo "<td style='color:white'><b><center>Name</td>";
+										echo "<td style='color:white' width='15%'><b><center>Name</td>";
 										echo "<td style='color:white'><b><center>Department</td>";
 										echo "<td style='color:white'><b><center>Job Title</td>";
 										echo "<td style='color:white'><b><center>Employment Status</td>";
 										echo "<td style='color:white'><b><center>Active Status</td>";
 										echo "<td style='color:white'><b><center>Location</td>";
-										echo "<td style='color:white'><b><center></td>";
+										echo "<td style='color:white' width='7%'><b><center></td>";
 										echo "</tr>";
 										?>
 										</tr>
@@ -123,7 +121,8 @@ jq(document).ready(function() {
 												break;
 										}
 										echo "<td>
-											<button type='button' class='btn btn-xs btn-danger' onclick='hapus(".$d->ID_EMPLOYEE.")'><i class='fa fa-times'></i> Delete</button>
+											<button type='button' class='btn btn-xs btn-success' onclick='active(".$d->ID_EMPLOYEE.")' "; echo $d->ACTIVE_STATUS=='1'?'style="display:none;"':''; echo"><i class='fa fa-user'></i> Active</button>
+											<button type='button' class='btn btn-xs btn-danger' onclick='hapus(".$d->ID_EMPLOYEE.")' "; echo $d->ACTIVE_STATUS=='2'?'style="display:none;"':''; echo"><i class='fa fa-times'></i> Delete</button>
 										</td>";
 										
 										echo "</tr>";				
@@ -149,6 +148,30 @@ jq(document).ready(function() {
 			{
 				$.ajax({
 					url 	: '<?php echo base_url() ?>master/employee_act/hapus',
+					type 	: 'post',
+					data 	: {'id':id},
+					success : function(r)
+					{
+						location.reload();
+					},
+					error 	: function(r)
+					{
+						alert("Maaf data tidak dapat di hapus, cek transaksi yang terhubung dengan data ini !.");
+					}
+				});
+			}
+			else{
+				location.reload();
+			}
+		}
+
+		function active(id)
+		{
+			var cek = confirm("apakah anda yakin ingin mengactive kan data ini ?");
+			if (cek)
+			{
+				$.ajax({
+					url 	: '<?php echo base_url() ?>master/employee_act/active',
 					type 	: 'post',
 					data 	: {'id':id},
 					success : function(r)

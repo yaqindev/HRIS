@@ -47,7 +47,7 @@ class Laporan extends CI_Controller {
 					redirect('login');
 				}
 
-				if ($level== '1')
+				if ($level== '1'||$level== '3')
 				{
 					$alias 	= 'DEPT';
 					$cond 	= array(
@@ -95,8 +95,6 @@ class Laporan extends CI_Controller {
 						</div><!-- end .row -->
 					<hr>
 					';
-						
-
 				}else if ($level== '2')
 				{
 					$id_user 			= $_SESSION['id_user'];
@@ -155,10 +153,6 @@ class Laporan extends CI_Controller {
 					$this->session->sess_destroy();
 					redirect('login');	
 				}
-				
-
-
-
 				break;
 			case 'set_grafik':
 				$periode 	= $this->input->post('periode_search');
@@ -196,7 +190,7 @@ class Laporan extends CI_Controller {
 					redirect('login');
 				}
 
-				if ($level== '1')
+				if ($level== '1'||$level== '3')
 				{
 					$cond 	= array(
 							'performance_appraisal_detail.ID_PERIODE' => $periode,
@@ -336,7 +330,7 @@ class Laporan extends CI_Controller {
 			redirect('login');
 		}
 
-		if ($level== '1')
+		if ($level== '1'||$level== '3')
 		{
 			$alias 	= 'DEPT';
 			$cond 	= array(

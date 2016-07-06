@@ -57,6 +57,8 @@ class M_Jobtitle extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('job_title');
 		$this->db->like('TITLE','manager','before');
+		$this->db->or_like('TITLE','director');
+		$this->db->or_like('TITLE','GM business');
 		$this->db->where('STATUS_JOB','0');
 		return $this->db->get()->result();		
 	}

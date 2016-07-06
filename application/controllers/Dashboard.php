@@ -28,7 +28,7 @@ class Dashboard extends CI_Controller {
 		}
 
 
-		if ($level == '1')
+		if ($level == '1'||$level == '3')
 		{
 			$cond 	= array(
 					'performance_appraisal_detail.ID_PERIODE' => $periode,

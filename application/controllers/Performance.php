@@ -539,7 +539,9 @@ class Performance extends CI_Controller {
 							$target = $kpi->TARGET;
 							$weight = $kpi->WEIGHT;
 
-							$actual_periode = $this->tbl_kpi_monitoring->sum_actual_bulanan(array('ID_KPI'=>$id_kpi,'NAME_YEAR'=>$tahun,'ID_EMPLOYEE'=>$id_employee));
+
+							$actual_periode = $this->tbl_kpi_monitoring->sum_actual_bulanan(array('ID_KPI'=>$id_kpi,'NAME_YEAR'=>$tahun,'ID_EMPLOYEE'=>$id_employee ),$periode);
+							$actual_periode = $actual_periode/6;
 
 							if ($type == '+')
 							{

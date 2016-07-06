@@ -83,6 +83,7 @@ $this->load->view('header.php');
 										<select name="akses" id="akses" class="form-control" required>
 											<option value="">-- Pilih akses --</option>
 											<option value="2">Manager</option>
+											<option value="3">Executive</option>
 											<option value="1">Administrator</option>
 										</select>
 										</div>

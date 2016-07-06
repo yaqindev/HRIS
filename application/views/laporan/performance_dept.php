@@ -19,12 +19,12 @@
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
 			<tr>
 				<th style ="text-align:center;" width="5%">No.</th>
-				<th style ="text-align:center;" width="60%"><?php if ($level == '1') {echo "Department";}else{echo "Segment";} ?></th>
+				<th style ="text-align:center;" width="60%"><?php if ($level == '1'||$level == '3') {echo "Department";}else{echo "Segment";} ?></th>
 				<th style ="text-align:center;" width="15%">Nilai</th>
 			</tr>
 		<?php 
 		$no = 1;
-		if ($_SESSION['level']=='1')
+		if ($_SESSION['level']=='1'||$_SESSION['level']=='3')
 		{
 			foreach ($dept as $dept) {
 			echo '

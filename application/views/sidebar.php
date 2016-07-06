@@ -54,6 +54,8 @@
 		</ul>
 	</li>
 	<?php endif ?>
+	<?php if ($_SESSION['level']=='1' || $_SESSION['level']=='2'): ?>
+		
 	<li class="sub-menu">
 		<a href="#">
 			<i class="fa fa-plus"></i>
@@ -87,6 +89,7 @@
 			</li>
 		</ul>
 	</li>
+	<?php endif ?>
 	<li class="sub-menu">
 		<a href="<?php echo base_url()."laporan/report";?>" class="dropdown-toggle">
 			<i class="fa fa-book"></i>

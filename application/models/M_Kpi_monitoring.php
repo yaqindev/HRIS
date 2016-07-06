@@ -26,12 +26,17 @@ class M_Kpi_monitoring extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function sum_actual_bulanan(array $cond = NULL)
+	public function sum_actual_bulanan(array $cond = NULL,$periode)
 	{
 		$this->db->select_sum('ACTUAL_BULANAN','TOTAL_ACTUAL');
 		$this->db->from('kpi_monitoring');
 		if (count($cond) > 0)
 			$this->db->where($cond);
+		if ($periode == '1') {
+			$this->db->where('BULAN <','7');
+		}else{
+			$this->db->where('BULAN >','6');
+		}
 		$total = $this->db->get()->result()[0]->TOTAL_ACTUAL;
 		if ($total != null or $total!= 0)
 		{
@@ -61,6 +66,4 @@ class M_Kpi_monitoring extends CI_Model {
 		return $this->db->update('kpi_monitoring',$data,$where);
 		
 	}
-	
-
 }

@@ -56,7 +56,7 @@ $this->load->view('header.php');
 	        },
 	        series: [
 	        <?php
-	        	if ($_SESSION['level'] == '1')
+	        	if ($_SESSION['level'] == '1'||$_SESSION['level'] == '3')
 	        	{
 		        	foreach ($dept as $dept) {
 		        		echo "
